@@ -1,1 +1,91 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+@import './tokens.css';
+
+@layer utilities {
+  /* Typography Presets */
+  .font-display-hero {
+    font-family: var(--font-headline);
+    font-size: 4.5rem;
+    font-weight: 600;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .font-display-hero-mobile {
+    font-family: var(--font-headline);
+    font-size: 2.75rem;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+  .font-headline-lg {
+    font-family: var(--font-headline);
+    font-size: 3rem;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+  .font-headline-lg-mobile {
+    font-family: var(--font-headline);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  .font-headline-md {
+    font-family: var(--font-headline);
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+  }
+  .font-headline-sm {
+    font-family: var(--font-headline);
+    font-size: 1.375rem;
+    font-weight: 500;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+  .font-body-lg {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+  .font-body-md {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.55;
+    letter-spacing: 0em;
+  }
+  .font-body-sm {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.005em;
+  }
+  .font-label-md {
+    font-family: var(--font-body);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+  }
+  .font-label-sm {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: 0.06em;
+  }
+
+  /* Safe Area Helpers for Mobile */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
