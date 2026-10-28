@@ -1,43 +1,97 @@
-# Astro Starter Kit: Minimal
+# Naulia Zahra Creative Portfolio
 
-```sh
-npm create astro@latest -- --template minimal
-```
+A responsive single-page personal portfolio built with Astro, TypeScript, and Tailwind CSS v4.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Tech Stack
 
-## 🚀 Project Structure
+- [Astro](https://astro.build/) — Static site generator
+- [TypeScript](https://www.typescriptlang.org/) — Type safety
+- [Tailwind CSS v4](https://tailwindcss.com/) — Utility-first CSS
+- [ESLint](https://eslint.org/) — Linting
+- [Prettier](https://prettier.io/) — Code formatting
 
-Inside of your Astro project, you'll see the following folders and files:
+## Project Structure
 
 ```text
 /
 ├── public/
+│   ├── admin/            # Decap CMS admin interface
+│   ├── audio/            # Audio samples (manually managed)
+│   ├── fonts/            # Web fonts (Outfit, Hanken Grotesk)
+│   ├── images/           # Hero, project, audio, and common images
+│   └── favicon.svg
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/
+│   │   ├── common/       # Reusable UI primitives
+│   │   ├── audio/        # Audio-specific components
+│   │   ├── portfolio/    # Portfolio-specific components
+│   │   └── sections/     # Page section components
+│   ├── content/
+│   │   ├── pages/        # Page content collections
+│   │   ├── projects/     # Project entries
+│   │   └── audio/        # Audio entries
+│   ├── layouts/
+│   │   └── BaseLayout.astro
+│   ├── lib/              # Utility modules
+│   ├── pages/
+│   │   └── index.astro   # Single-page entry
+│   ├── scripts/          # Build-time validation scripts
+│   └── styles/
+│       ├── global.css    # Tailwind CSS import
+│       └── tokens.css    # Design system tokens
+├── tests/
+│   ├── unit/
+│   └── e2e/
+├── astro.config.mjs
+├── eslint.config.mjs
+├── package.json
+├── tsconfig.json
+└── README.md
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Commands
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+| Command                | Action                                     |
+| ---------------------- | ------------------------------------------ |
+| `npm install`          | Install dependencies                       |
+| `npm run dev`          | Start local dev server at `localhost:4321` |
+| `npm run build`        | Build production site to `./dist/`         |
+| `npm run preview`      | Preview production build locally           |
+| `npm run check`        | Run Astro TypeScript checking              |
+| `npm run lint`         | Run ESLint                                 |
+| `npm run format`       | Run Prettier to format all files           |
+| `npm run format:check` | Check Prettier formatting without writing  |
+| `npm run astro`        | Run Astro CLI commands                     |
 
-Any static assets, like images, can be placed in the `public/` directory.
+## Development
 
-## 🧞 Commands
+1. Install dependencies:
 
-All commands are run from the root of the project, from a terminal:
+   ```bash
+   npm install
+   ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+2. Start the development server:
 
-## 👀 Want to learn more?
+   ```bash
+   npm run dev
+   ```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+3. Open `http://localhost:4321` in your browser.
+
+4. Before committing, run validation:
+
+   ```bash
+   npm run check
+   npm run lint
+   npm run format:check
+   npm run build
+   ```
+
+## Design
+
+The visual design follows the **"Curated Lumina"** design system from Google Stitch (Project `Naulia Zahra Creative Portfolio`). Design tokens are defined in `src/styles/tokens.css` per `docs/DESIGN.md`.
+
+## Deployment
+
+Deployed via Cloudflare Pages with the build command `npm run build` and output directory `dist/`.

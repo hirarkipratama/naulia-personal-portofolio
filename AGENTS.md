@@ -9,6 +9,7 @@ Read `docs/PRD.md` before implementing features.
 Use `docs/DESIGN.md` as the visual design specification when it is available.
 
 The website is built using:
+
 - Astro
 - TypeScript
 - Tailwind CSS v4
@@ -61,12 +62,14 @@ The website is built using:
 ## AI Agent Workflow
 
 Before implementing:
+
 1. Read the PRD and relevant design documentation.
 2. Inspect the existing repository.
 3. Identify the current implementation phase.
 4. Explain the proposed file changes.
 
 During implementation:
+
 1. Work only on the requested phase.
 2. Preserve existing architecture.
 3. Avoid modifying unrelated files.
@@ -74,6 +77,7 @@ During implementation:
 5. Never commit credentials or API keys.
 
 After implementation:
+
 1. Run available validation commands.
 2. Report which checks passed or failed.
 3. Summarize changed files.

@@ -1,14 +1,15 @@
 # Product Requirements Document (PRD)
+
 ## Personal Portfolio Website with Content Management System
 
-| Document Information | Details |
-|---|---|
-| **Project Name** | Personal Portfolio Website |
-| **Document Version** | 1.0 |
-| **Created Date** | 24 October 2026 |
-| **Status** | Proposed for Implementation |
-| **Project Type** | Single-Page Personal Portfolio |
-| **Development Approach** | Static-First Architecture |
+| Document Information     | Details                        |
+| ------------------------ | ------------------------------ |
+| **Project Name**         | Personal Portfolio Website     |
+| **Document Version**     | 1.0                            |
+| **Created Date**         | 24 October 2026                |
+| **Status**               | Proposed for Implementation    |
+| **Project Type**         | Single-Page Personal Portfolio |
+| **Development Approach** | Static-First Architecture      |
 
 ---
 
@@ -44,14 +45,14 @@ the project's asset directories.
 
 ## 1.3 Confirmed Product Decisions
 
-| Category | Decision |
-|---|---|
-| CMS Editor | Non-technical portfolio owner |
-| Website Structure | Single-page portfolio |
-| Publishing Workflow | Direct publishing |
-| Media Management | Manual repository management |
-| Database | Not required |
-| Hosting | Cloudflare Pages |
+| Category            | Decision                      |
+| ------------------- | ----------------------------- |
+| CMS Editor          | Non-technical portfolio owner |
+| Website Structure   | Single-page portfolio         |
+| Publishing Workflow | Direct publishing             |
+| Media Management    | Manual repository management  |
+| Database            | Not required                  |
+| Hosting             | Cloudflare Pages              |
 
 ---
 
@@ -98,21 +99,21 @@ The developer will manage:
 
 ## 3.1 MVP Features
 
-| ID | Feature | Priority |
-|---|---|---|
-| FR-01 | Responsive navigation | P0 |
-| FR-02 | Hero section | P0 |
-| FR-03 | About section | P0 |
-| FR-04 | Featured portfolio projects | P0 |
-| FR-05 | Audio showcase and playback | P0 |
-| FR-06 | Contact and social links | P0 |
-| FR-07 | CMS content editing | P0 |
-| FR-08 | Direct content publishing | P0 |
-| FR-09 | SEO metadata and sitemap | P0 |
-| FR-10 | Asset-reference validation | P0 |
-| FR-11 | Subtle UI animations | P1 |
-| FR-12 | Dedicated project detail pages | P1 |
-| FR-13 | Analytics integration | P2 |
+| ID    | Feature                        | Priority |
+| ----- | ------------------------------ | -------- |
+| FR-01 | Responsive navigation          | P0       |
+| FR-02 | Hero section                   | P0       |
+| FR-03 | About section                  | P0       |
+| FR-04 | Featured portfolio projects    | P0       |
+| FR-05 | Audio showcase and playback    | P0       |
+| FR-06 | Contact and social links       | P0       |
+| FR-07 | CMS content editing            | P0       |
+| FR-08 | Direct content publishing      | P0       |
+| FR-09 | SEO metadata and sitemap       | P0       |
+| FR-10 | Asset-reference validation     | P0       |
+| FR-11 | Subtle UI animations           | P1       |
+| FR-12 | Dedicated project detail pages | P1       |
+| FR-13 | Analytics integration          | P2       |
 
 ### Priority Definitions
 
@@ -336,19 +337,19 @@ The CMS will store paths to manually maintained media files.
 
 ```yaml
 hero:
-  title: "Bringing Stories to Life"
-  description: "A creative storytelling portfolio."
-  image: "/images/hero/portrait.webp"
+  title: 'Bringing Stories to Life'
+  description: 'A creative storytelling portfolio.'
+  image: '/images/hero/portrait.webp'
 ```
 
 ### Example Audio Content
 
 ```yaml
-title: "A Story in the Forest"
-category: "Narration"
-description: "A short storytelling audio sample."
-audioPath: "/audio/sample-01.mp3"
-coverImage: "/images/audio/sample-01.webp"
+title: 'A Story in the Forest'
+category: 'Narration'
+description: 'A short storytelling audio sample.'
+audioPath: '/audio/sample-01.mp3'
+coverImage: '/images/audio/sample-01.webp'
 featured: true
 order: 1
 ```
@@ -370,20 +371,20 @@ The CMS will not upload, replace, or delete binary media files.
 
 ## 7.1 Technology Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend Framework | Astro |
-| Programming Language | TypeScript |
-| Styling | Tailwind CSS v4 |
-| Content Model | Astro Content Collections |
-| Schema Validation | Zod |
-| CMS | Decap CMS |
-| Repository | GitHub |
-| Hosting | Cloudflare Pages |
-| Unit Testing | Vitest |
-| End-to-End Testing | Playwright |
-| Accessibility Testing | axe-core |
-| Performance Testing | Lighthouse |
+| Layer                 | Technology                |
+| --------------------- | ------------------------- |
+| Frontend Framework    | Astro                     |
+| Programming Language  | TypeScript                |
+| Styling               | Tailwind CSS v4           |
+| Content Model         | Astro Content Collections |
+| Schema Validation     | Zod                       |
+| CMS                   | Decap CMS                 |
+| Repository            | GitHub                    |
+| Hosting               | Cloudflare Pages          |
+| Unit Testing          | Vitest                    |
+| End-to-End Testing    | Playwright                |
+| Accessibility Testing | axe-core                  |
+| Performance Testing   | Lighthouse                |
 
 ## 7.2 Architectural Principles
 
@@ -469,15 +470,15 @@ personal-portfolio/
 
 ### Proposed Quality Targets
 
-| Metric | Target |
-|---|---|
-| Lighthouse Performance | >= 90 |
-| Lighthouse Accessibility | >= 95 |
-| Lighthouse Best Practices | >= 95 |
-| Lighthouse SEO | >= 95 |
-| Largest Contentful Paint | <= 2.5 seconds |
+| Metric                    | Target              |
+| ------------------------- | ------------------- |
+| Lighthouse Performance    | >= 90               |
+| Lighthouse Accessibility  | >= 95               |
+| Lighthouse Best Practices | >= 95               |
+| Lighthouse SEO            | >= 95               |
+| Largest Contentful Paint  | <= 2.5 seconds      |
 | Interaction to Next Paint | <= 200 milliseconds |
-| Cumulative Layout Shift | <= 0.1 |
+| Cumulative Layout Shift   | <= 0.1              |
 
 These are acceptance targets to be verified under
 representative test conditions.
@@ -521,15 +522,15 @@ The project must implement:
 
 # 9. Implementation Roadmap
 
-| Phase | Deliverable | Estimated Effort |
-|---|---|---|
-| 1 | Project Foundation | 4–6 hours |
-| 2 | Design System | 8–12 hours |
-| 3 | Core UI Implementation | 12–18 hours |
-| 4 | CMS Integration | 8–12 hours |
-| 5 | Audio and Interaction | 4–6 hours |
-| 6 | Testing and Optimization | 6–10 hours |
-| 7 | Deployment and Handover | 3–6 hours |
+| Phase | Deliverable              | Estimated Effort |
+| ----- | ------------------------ | ---------------- |
+| 1     | Project Foundation       | 4–6 hours        |
+| 2     | Design System            | 8–12 hours       |
+| 3     | Core UI Implementation   | 12–18 hours      |
+| 4     | CMS Integration          | 8–12 hours       |
+| 5     | Audio and Interaction    | 4–6 hours        |
+| 6     | Testing and Optimization | 6–10 hours       |
+| 7     | Deployment and Handover  | 3–6 hours        |
 
 **Total Estimated Effort: 45–70 focused development hours.**
 
@@ -732,12 +733,12 @@ The website will be deployed using Cloudflare Pages.
 
 ## 12.2 Build Configuration
 
-| Setting | Value |
-|---|---|
-| Production Branch | `main` |
-| Build Command | `npm run build` |
-| Output Directory | `dist` |
-| Rendering Mode | Static |
+| Setting           | Value           |
+| ----------------- | --------------- |
+| Production Branch | `main`          |
+| Build Command     | `npm run build` |
+| Output Directory  | `dist`          |
+| Rendering Mode    | Static          |
 
 ## 12.3 Deployment Validation
 
@@ -759,15 +760,15 @@ previous Git commits and deployments.
 
 # 13. Risks and Mitigation
 
-| Risk | Mitigation |
-|---|---|
-| CMS authentication fails | Validate authentication before final CMS integration |
-| Direct publishing introduces invalid content | Use schema validation and automated build checks |
-| Media files are missing | Validate file references during build |
-| Audio files become too large | Compress assets and evaluate object storage |
-| UI differs from Stitch reference | Perform visual comparison and responsive QA |
-| Owner struggles with CMS | Use clear field labels and provide an editor guide |
-| Branch protection blocks CMS commits | Configure a compatible repository policy |
+| Risk                                         | Mitigation                                           |
+| -------------------------------------------- | ---------------------------------------------------- |
+| CMS authentication fails                     | Validate authentication before final CMS integration |
+| Direct publishing introduces invalid content | Use schema validation and automated build checks     |
+| Media files are missing                      | Validate file references during build                |
+| Audio files become too large                 | Compress assets and evaluate object storage          |
+| UI differs from Stitch reference             | Perform visual comparison and responsive QA          |
+| Owner struggles with CMS                     | Use clear field labels and provide an editor guide   |
+| Branch protection blocks CMS commits         | Configure a compatible repository policy             |
 
 ---
 
