@@ -1,0 +1,98 @@
+---
+import type { AudioTrackItem } from '../../types/portfolio';
+import AudioTrackCard from '../audio/AudioTrackCard.astro';
+import SectionHeader from '../common/SectionHeader.astro';
+
+interface Props {
+  tracks: AudioTrackItem[];
+}
+
+const { tracks } = Astro.props;
+
+const audioCategories = [
+  { id: 'all', label: 'Semua (4)' },
+  { id: 'storybook', label: 'Buku Cerita' },
+  { id: 'science', label: 'Sains' },
+  { id: 'character', label: 'VO Karakter' }
+];
+---
+
+<section class="pt-space-xl mb-space-xl scroll-mt-24" id="voice-audio-reel">
+  <!-- Section Header -->
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm mb-space-lg">
+    <SectionHeader
+      kicker="🎙️ REEL SUARA & BUKU SUARA"
+      kickerIcon="graphic_eq"
+      kickerVariant="tertiary"
+      title="Karya Pilihan Buku Suara & VO"
+      subtitle="Penceritaan imersif, karakter suara animasi, dan narasi edukatif untuk imajinasi anak-anak."
+      className="mb-0"
+    />
+
+    <!-- Category Filter Tabs -->
+    <div
+      class="flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar self-start md:self-end"
+      id="audio-filter-tabs"
+      role="tablist"
+      aria-label="Filter Kategori Audio"
+    >
+      {audioCategories.map((cat, idx) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={idx === 0 ? 'true' : 'false'}
+          data-audio-filter={cat.id}
+          class:list={[
+            'audio-filter-btn px-3.5 py-1.5 rounded-full font-label-sm text-label-sm font-semibold shrink-0 transition-all duration-200 active:scale-95 cursor-pointer',
+            idx === 0
+              ? 'bg-primary text-on-primary shadow-xs'
+              : 'bg-surface-container-high text-on-surface hover:bg-surface-container-highest'
+          ]}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Audio Cards 2-column Desktop / 1-column Mobile -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md" id="audio-cards-container">
+    {tracks.map((track) => (
+      <AudioTrackCard track={track} />
+    ))}
+  </div>
+</section>
+
+<script>
+  function setupAudioFilters() {
+    const filterButtons = document.querySelectorAll<HTMLButtonElement>('.audio-filter-btn');
+    const audioCards = document.querySelectorAll<HTMLElement>('.vo-card');
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const cat = btn.getAttribute('data-audio-filter') || 'all';
+
+        filterButtons.forEach((b) => {
+          b.setAttribute('aria-selected', 'false');
+          b.classList.remove('bg-primary', 'text-on-primary', 'shadow-xs');
+          b.classList.add('bg-surface-container-high', 'text-on-surface');
+        });
+        btn.setAttribute('aria-selected', 'true');
+        btn.classList.remove('bg-surface-container-high', 'text-on-surface');
+        btn.classList.add('bg-primary', 'text-on-primary', 'shadow-xs');
+
+        audioCards.forEach((card) => {
+          const cardCat = card.getAttribute('data-category');
+          if (cat === 'all' || cardCat === cat) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  setupAudioFilters();
+  document.addEventListener('astro:after-swap', setupAudioFilters);
+</script>

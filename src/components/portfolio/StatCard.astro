@@ -1,0 +1,33 @@
+---
+import type { StatItem } from '../../types/portfolio';
+
+interface Props {
+  stat: StatItem;
+}
+
+const { stat } = Astro.props;
+
+const tintClasses = {
+  surface: 'bg-surface-container-lowest text-primary',
+  secondary: 'bg-secondary-container/40 text-secondary',
+  tertiary: 'bg-tertiary-fixed/30 text-tertiary',
+  primary: 'bg-primary-fixed/40 text-primary'
+}[stat.tintVariant];
+---
+
+<div
+  class:list={[
+    'p-space-md rounded-3xl shadow-xs flex flex-col items-center text-center transition-transform hover:-translate-y-1',
+    tintClasses
+  ]}
+>
+  <span class="font-display-hero text-headline-lg font-semibold leading-none">
+    {stat.value}
+  </span>
+  <span class="font-label-md text-label-md text-on-surface font-semibold mt-1">
+    {stat.label}
+  </span>
+  <span class="font-body-sm text-body-sm text-on-surface-variant">
+    {stat.sublabel}
+  </span>
+</div>

@@ -1,0 +1,82 @@
+---
+import type { ContactData } from '../../types/portfolio';
+import SectionHeader from '../common/SectionHeader.astro';
+import BookingForm from '../contact/BookingForm.astro';
+
+interface Props {
+  contact: ContactData;
+}
+
+const { contact } = Astro.props;
+---
+
+<section class="pt-space-md mb-space-lg scroll-mt-24" id="contact">
+  <div class="rounded-3xl bg-surface-container-lowest p-space-lg md:p-space-xl shadow-[0_16px_36px_-6px_rgba(28,26,23,0.06)] border border-outline-variant/20">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+      <!-- Left Side: Pitch & Direct Reach Channels -->
+      <div class="lg:col-span-5 flex flex-col gap-space-md">
+        <SectionHeader
+          kicker={contact.kicker}
+          kickerIcon="celebration"
+          kickerVariant="secondary"
+          title={contact.headline}
+          subtitle={contact.description}
+          className="mb-0"
+        />
+
+        <!-- Direct Contact Action Cards -->
+        <div class="flex flex-col gap-space-xs pt-space-xs">
+          {contact.directChannels.map((channel) => (
+            <a
+              href={channel.href}
+              target={channel.type === 'whatsapp' ? '_blank' : undefined}
+              rel={channel.type === 'whatsapp' ? 'noopener noreferrer' : undefined}
+              class="flex items-center gap-space-sm p-space-sm rounded-2xl bg-surface-container-low hover:bg-surface-container transition-all group border border-outline-variant/20"
+            >
+              <div class:list={['w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-2xs', channel.iconBgClass]}>
+                <span class="material-symbols-outlined text-[22px]" aria-hidden="true">
+                  {channel.icon}
+                </span>
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="font-label-sm text-label-sm text-on-surface-variant uppercase font-bold">
+                  {channel.title}
+                </span>
+                <span class="font-body-md text-body-md text-on-surface font-semibold truncate group-hover:text-primary transition-colors">
+                  {channel.value}
+                </span>
+              </div>
+              <span class="material-symbols-outlined text-primary text-[20px] ml-auto group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
+                north_east
+              </span>
+            </a>
+          ))}
+
+          <!-- Social Links Row -->
+          <div class="flex items-center gap-space-xs pt-space-xs">
+            {contact.socialLinks.map((social) => (
+              <a
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-surface-container-low hover:bg-surface-container text-on-surface font-label-md text-label-md font-semibold transition-all border border-outline-variant/20 group"
+              >
+                <span class="material-symbols-outlined text-[18px] text-primary" aria-hidden="true">
+                  {social.icon}
+                </span>
+                <span class="group-hover:text-primary transition-colors">
+                  {social.handle}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side: Booking Inquiry Form -->
+      <div class="lg:col-span-7">
+        <BookingForm serviceOptions={contact.serviceOptions} />
+      </div>
+    </div>
+  </div>
+</section>

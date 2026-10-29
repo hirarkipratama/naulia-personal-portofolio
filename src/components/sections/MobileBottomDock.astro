@@ -1,0 +1,45 @@
+---
+const mobileNavItems = [
+  { label: 'Beranda', href: '#home', path: 'home', icon: 'cottage' },
+  { label: 'Buku Suara', href: '#voice-audio-reel', path: 'audio', icon: 'mic' },
+  { label: 'Acara', href: '#mc-live-stage', path: 'events', icon: 'campaign' },
+  { label: 'Profil', href: '#about-naulia', path: 'about', icon: 'auto_stories' },
+  { label: 'Kontak', href: '#contact', path: 'contact', icon: 'mail' }
+];
+---
+
+<nav
+  class="lg:hidden fixed bottom-0 left-0 right-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(28,26,23,0.06)] border-t border-outline-variant/30"
+  aria-label="Navigasi Bawah Seluler"
+  id="mobile-bottom-dock"
+>
+  <div class="flex justify-around items-center h-16 px-space-xs">
+    {mobileNavItems.map((item, index) => (
+      <a
+        href={item.href}
+        data-path={item.path}
+        class:list={[
+          'relative flex flex-col items-center justify-center min-w-[44px] min-h-[44px] transition-all duration-200 gap-0.5 active:scale-95',
+          index === 0
+            ? 'text-primary font-semibold scale-105 active-mobile-tab'
+            : 'text-on-surface-variant'
+        ]}
+        aria-current={index === 0 ? 'page' : undefined}
+      >
+        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">
+          {item.icon}
+        </span>
+        <span class="nav-label font-label-sm text-[11px] leading-tight">
+          {item.label}
+        </span>
+        <span
+          class:list={[
+            'active-dot absolute -bottom-1 w-1 h-1 rounded-full bg-primary transition-all duration-200',
+            index === 0 ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+          ]}
+          aria-hidden="true"
+        ></span>
+      </a>
+    ))}
+  </div>
+</nav>

@@ -1,0 +1,105 @@
+---
+import type { BookProjectItem } from '../../types/portfolio';
+import BookCard from '../portfolio/BookCard.astro';
+import SectionHeader from '../common/SectionHeader.astro';
+
+interface Props {
+  books: BookProjectItem[];
+}
+
+const { books } = Astro.props;
+
+const categories = [
+  { id: 'all', label: 'Semua (6)' },
+  { id: 'storybook', label: 'Buku Cerita' },
+  { id: 'science', label: 'Sains' },
+  { id: 'encyclopedia', label: 'Ensiklopedia' }
+];
+---
+
+<section class="pt-space-xl mb-space-xl scroll-mt-24" id="editorial-portfolio">
+  <!-- Section Header -->
+  <div class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm mb-space-lg">
+    <SectionHeader
+      kicker="📖 LITERATUR ANAK & SAINS"
+      kickerIcon="menu_book"
+      kickerVariant="secondary"
+      title="Pilihan Karya Editorial & Buku"
+      subtitle="Dari kurasi konsep ilmiah hingga ritme penuturan karakter—membidani buku-buku berharga bagi generasi penerus."
+      className="mb-0"
+    />
+
+    <!-- Interactive Category Filter Tabs -->
+    <div
+      class="flex items-center gap-1.5 overflow-x-auto py-1 no-scrollbar self-start md:self-end"
+      id="book-filter-tabs"
+      role="tablist"
+      aria-label="Filter Kategori Buku"
+    >
+      {categories.map((cat, idx) => (
+        <button
+          type="button"
+          role="tab"
+          aria-selected={idx === 0 ? 'true' : 'false'}
+          data-category-filter={cat.id}
+          class:list={[
+            'book-filter-btn px-3.5 py-1.5 rounded-full font-label-sm text-label-sm font-semibold shrink-0 transition-all duration-200 active:scale-95 cursor-pointer',
+            idx === 0
+              ? 'bg-primary text-on-primary shadow-xs'
+              : 'bg-surface-container-high text-on-surface hover:bg-surface-container-highest'
+          ]}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Book Grid: 3-column Desktop / 2-column Mobile -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md"
+    id="book-grid"
+  >
+    {books.map((book) => (
+      <BookCard project={book} />
+    ))}
+  </div>
+</section>
+
+<script>
+  function setupBookFilters() {
+    const filterButtons =
+      document.querySelectorAll<HTMLButtonElement>('.book-filter-btn');
+    const bookCards = document.querySelectorAll<HTMLElement>('.book-card');
+
+    filterButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const targetCategory =
+          btn.getAttribute('data-category-filter') || 'all';
+
+        // Update active tab styles
+        filterButtons.forEach((b) => {
+          b.setAttribute('aria-selected', 'false');
+          b.classList.remove('bg-primary', 'text-on-primary', 'shadow-xs');
+          b.classList.add('bg-surface-container-high', 'text-on-surface');
+        });
+        btn.setAttribute('aria-selected', 'true');
+        btn.classList.remove('bg-surface-container-high', 'text-on-surface');
+        btn.classList.add('bg-primary', 'text-on-primary', 'shadow-xs');
+
+        // Filter cards
+        bookCards.forEach((card) => {
+          const cardCategory = card.getAttribute('data-category');
+          if (targetCategory === 'all' || cardCategory === targetCategory) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  }
+
+  setupBookFilters();
+  document.addEventListener('astro:after-swap', setupBookFilters);
+</script>

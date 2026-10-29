@@ -1,0 +1,69 @@
+---
+import type {
+  StatItem,
+  EventHighlightItem,
+  ClientPartnerItem
+} from '../../types/portfolio';
+import StatCard from '../portfolio/StatCard.astro';
+import EventCard from '../portfolio/EventCard.astro';
+import SectionHeader from '../common/SectionHeader.astro';
+
+interface Props {
+  stats: StatItem[];
+  events: EventHighlightItem[];
+  partners: ClientPartnerItem[];
+}
+
+const { stats, events, partners } = Astro.props;
+---
+
+<section class="pt-space-md mb-space-xl scroll-mt-24" id="mc-live-stage">
+  <!-- Header -->
+  <SectionHeader
+    kicker="🎙️ MC PANGGUNG & MODERATOR ACARA"
+    kickerIcon="mic"
+    kickerVariant="primary"
+    title="Menghangatkan Panggung dengan Antusiasme & Energi"
+    subtitle="Menjaga auditorium berisi 500+ audiens tetap antusias, ceria, dan penasaran lewat pemanduan yang interaktif dan penuh empati."
+    align="center"
+  />
+
+  <!-- 4-Column Stat Grid (2x2 on mobile) -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-space-sm mb-space-lg">
+    {stats.map((stat) => (
+      <StatCard stat={stat} />
+    ))}
+  </div>
+
+  <!-- 2-Column Wide Event Showcase Cards -->
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-space-md mb-space-lg">
+    {events.map((ev) => (
+      <EventCard event={ev} />
+    ))}
+  </div>
+
+  <!-- Trusted Client Partner Logo Row -->
+  <div class="rounded-2xl bg-surface-container-low p-space-md flex flex-col md:flex-row items-center justify-between gap-space-md">
+    <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold text-center md:text-left">
+      DIPERCAYA OLEH PENERBIT & LEMBAGA EDUKASI TERNAMA
+    </span>
+    <div class="flex flex-wrap items-center justify-center gap-space-lg opacity-85">
+      {partners.map((partner) => (
+        <div class="flex items-center gap-2">
+          <span
+            class:list={[
+              'material-symbols-outlined text-[24px]',
+              partner.iconColorClass
+            ]}
+            aria-hidden="true"
+          >
+            {partner.icon}
+          </span>
+          <span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-surface">
+            {partner.name}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

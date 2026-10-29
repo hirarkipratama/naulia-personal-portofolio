@@ -1,0 +1,43 @@
+---
+interface Props {
+  isPlaying?: boolean;
+}
+
+const { isPlaying = false } = Astro.props;
+---
+
+<span class="flex items-end gap-[2px] h-3.5 text-primary" aria-hidden="true">
+  <span class:list={['equalizer-bar', isPlaying && 'is-playing']}></span>
+  <span class:list={['equalizer-bar', isPlaying && 'is-playing']}></span>
+  <span class:list={['equalizer-bar', isPlaying && 'is-playing']}></span>
+  <span class:list={['equalizer-bar', isPlaying && 'is-playing']}></span>
+</span>
+
+<style>
+  @keyframes eqBounce {
+    0%, 100% {
+      height: 4px;
+      transform: scaleY(0.7);
+    }
+    50% {
+      height: 14px;
+      transform: scaleY(1);
+    }
+  }
+
+  .equalizer-bar {
+    width: 2.5px;
+    height: 4px;
+    background-color: currentColor;
+    border-radius: 9999px;
+  }
+
+  .equalizer-bar.is-playing {
+    animation: eqBounce 0.8s ease-in-out infinite alternate;
+  }
+
+  .equalizer-bar:nth-child(1) { animation-delay: 0s; }
+  .equalizer-bar:nth-child(2) { animation-delay: 0.25s; }
+  .equalizer-bar:nth-child(3) { animation-delay: 0.5s; }
+  .equalizer-bar:nth-child(4) { animation-delay: 0.15s; }
+</style>

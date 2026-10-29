@@ -1,0 +1,133 @@
+---
+import type { AudioTrackItem } from '../../types/portfolio';
+import EqualizerBars from './EqualizerBars.astro';
+
+interface Props {
+  track: AudioTrackItem;
+}
+
+const { track } = Astro.props;
+const isPlaying = track.initialPlaying || false;
+const currentProgress = track.initialProgress || 0;
+const currentElapsed = track.initialElapsedFormatted || '00:00';
+---
+
+<div
+  class="vo-card flex flex-col p-space-md rounded-3xl bg-surface-container-lowest shadow-[0_4px_16px_-2px_rgba(28,26,23,0.04)] hover:shadow-[0_12px_28px_-4px_rgba(255,142,114,0.18)] transition-all duration-300 hover:-translate-y-1 justify-between border border-outline-variant/20 gap-3"
+  data-category={track.category}
+  data-duration={track.durationSeconds}
+  data-playing={isPlaying ? 'true' : 'false'}
+  data-audio-src={track.audioPath}
+  id={track.id}
+>
+  <div class="flex flex-col gap-space-xs">
+    <!-- Category & Duration Readout -->
+    <div class="flex items-center justify-between">
+      <span
+        class:list={[
+          'px-3 py-1 rounded-full font-label-sm text-label-sm font-bold',
+          track.categoryVariant === 'secondary'
+            ? 'bg-secondary-fixed/50 text-on-secondary-fixed'
+            : track.categoryVariant === 'tertiary'
+              ? 'bg-tertiary-fixed/40 text-on-tertiary-fixed-variant'
+              : 'bg-primary-container/30 text-on-primary-container'
+        ]}
+      >
+        {track.categoryLabel}
+      </span>
+
+      <div class="flex items-center gap-2">
+        <span
+          class:list={[
+            'status-indicator items-center gap-1.5 font-label-sm text-label-sm text-primary font-medium',
+            isPlaying ? 'flex' : 'hidden'
+          ]}
+        >
+          <EqualizerBars isPlaying={isPlaying} />
+          <span class="status-text">Sedang Diputar</span>
+        </span>
+
+        <div class="flex items-center gap-1 text-on-surface-variant font-label-sm text-label-sm">
+          <span class="material-symbols-outlined text-[16px] text-tertiary" aria-hidden="true">
+            schedule
+          </span>
+          <span>{track.durationFormatted}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Title and Description -->
+    <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold group-hover:text-primary transition-colors mt-1">
+      {track.title}
+    </h3>
+    <p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-2">
+      {track.description}
+    </p>
+  </div>
+
+  <!-- Audio Controls Row -->
+  <div class="mt-space-md pt-space-xs border-t border-surface-container">
+    <div class="flex items-center gap-space-sm">
+      <button
+        type="button"
+        aria-label={`Putar audio ${track.title}`}
+        class:list={[
+          'play-btn relative w-11 h-11 shrink-0 rounded-full flex items-center justify-center shadow-md transition-all active:scale-90 cursor-pointer',
+          isPlaying
+            ? 'bg-primary-container text-on-primary ring-active'
+            : 'bg-primary text-on-primary hover:bg-primary-container'
+        ]}
+      >
+        <span class="material-symbols-outlined text-[24px]" aria-hidden="true">
+          {isPlaying ? 'pause' : 'play_arrow'}
+        </span>
+      </button>
+
+      <!-- Scrub Bar Container -->
+      <div class="flex-1 flex flex-col gap-1">
+        <div
+          class="scrub-container relative w-full h-2 bg-surface-container-high rounded-full overflow-hidden cursor-pointer"
+          role="progressbar"
+          aria-valuenow={currentProgress}
+          aria-valuemin="0"
+          aria-valuemax="100"
+        >
+          <div
+            class="scrub-fill h-full bg-primary rounded-full transition-all duration-300"
+            style={`width: ${currentProgress}%;`}
+          ></div>
+        </div>
+
+        <div class="flex items-center justify-between text-on-surface-variant font-label-sm text-[10px]">
+          <span class="time-elapsed font-semibold text-primary">{currentElapsed}</span>
+          <span class="time-total">{track.durationFormatted}</span>
+        </div>
+      </div>
+
+      <!-- Tag Pill -->
+      {track.tags.length > 0 && (
+        <span class="hidden sm:inline-block px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm whitespace-nowrap">
+          {track.tags[0]}
+        </span>
+      )}
+    </div>
+  </div>
+</div>
+
+<style>
+  @keyframes pulseRing {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.15); opacity: 0.2; }
+    100% { transform: scale(1.25); opacity: 0; }
+  }
+
+  .ring-active::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    border: 2px solid #ff8e72;
+    animation: pulseRing 1.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+    pointer-events: none;
+  }
+</style>

@@ -1,0 +1,17 @@
+---
+interface Props {
+  name: string;
+  className?: string;
+  filled?: boolean;
+}
+
+const { name, className = 'text-[20px]', filled = false } = Astro.props;
+---
+
+<span
+  class:list={['material-symbols-outlined', className]}
+  style={filled ? "font-variation-settings: 'FILL' 1;" : undefined}
+  aria-hidden="true"
+>
+  {name}
+</span>

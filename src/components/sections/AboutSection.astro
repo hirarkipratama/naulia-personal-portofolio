@@ -1,0 +1,80 @@
+---
+import type { AboutData } from '../../types/portfolio';
+import SectionHeader from '../common/SectionHeader.astro';
+
+interface Props {
+  about: AboutData;
+}
+
+const { about } = Astro.props;
+
+const capabilityColorClasses = {
+  primary: 'bg-primary-container/30 text-primary',
+  secondary: 'bg-secondary-fixed/50 text-secondary',
+  tertiary: 'bg-tertiary-fixed/40 text-tertiary'
+};
+---
+
+<section class="pt-space-md mb-space-xl scroll-mt-24" id="about-naulia">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+    <!-- Left Column: Narrative Philosophy & Quote -->
+    <div class="lg:col-span-5 flex flex-col gap-space-sm">
+      <SectionHeader
+        kicker={about.kicker}
+        kickerIcon="psychology"
+        kickerVariant="neutral"
+        title={about.headline}
+        className="mb-0"
+      />
+
+      <div class="flex flex-col gap-3 font-body-md text-body-md text-on-surface-variant">
+        {about.bioParagraphs.map((para) => (
+          <p class="leading-relaxed">{para}</p>
+        ))}
+      </div>
+
+      <!-- Quote Box -->
+      <div class="p-space-md rounded-2xl bg-secondary-container/20 border-l-4 border-secondary flex flex-col gap-2 mt-space-xs shadow-2xs relative overflow-hidden">
+        <span class="material-symbols-outlined text-primary text-[32px]" aria-hidden="true">
+          format_quote
+        </span>
+        <blockquote class="font-body-md text-body-md italic text-on-surface leading-relaxed">
+          {about.quote}
+        </blockquote>
+        <span class="font-label-sm text-label-sm font-bold text-secondary uppercase tracking-wider">
+          {about.quoteAuthor}
+        </span>
+      </div>
+    </div>
+
+    <!-- Right Column: Specialized Capabilities (Desktop 6-Grid / Mobile Responsive) -->
+    <div class="lg:col-span-7">
+      <div class="flex items-center justify-between mb-space-sm lg:hidden">
+        <span class="font-label-md text-label-md text-on-surface font-semibold">
+          Keahlian & Spesialisasi Utama:
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+        {about.capabilities.map((cap) => {
+          const iconBg = capabilityColorClasses[cap.colorVariant];
+          return (
+            <div class="p-space-md rounded-2xl bg-surface-container-lowest shadow-xs flex flex-col gap-2 border border-outline-variant/30 hover:border-outline-variant/70 transition-all hover:-translate-y-0.5">
+              <div class:list={['w-10 h-10 rounded-xl flex items-center justify-center', iconBg]}>
+                <span class="material-symbols-outlined text-[22px]" aria-hidden="true">
+                  {cap.icon}
+                </span>
+              </div>
+              <h3 class="font-headline-sm text-headline-sm font-semibold text-on-surface">
+                {cap.title}
+              </h3>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                {cap.description}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+</section>

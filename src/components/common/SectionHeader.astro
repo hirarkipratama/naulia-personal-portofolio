@@ -1,0 +1,59 @@
+---
+interface Props {
+  kicker: string;
+  kickerIcon?: string;
+  kickerVariant?: 'primary' | 'secondary' | 'tertiary' | 'neutral';
+  title: string;
+  subtitle?: string;
+  align?: 'left' | 'center';
+  className?: string;
+}
+
+const {
+  kicker,
+  kickerIcon,
+  kickerVariant = 'primary',
+  title,
+  subtitle,
+  align = 'left',
+  className = ''
+} = Astro.props;
+
+const kickerStyles = {
+  primary: 'bg-primary-container/30 text-on-primary-container',
+  secondary: 'bg-secondary-fixed/50 text-on-secondary-fixed',
+  tertiary: 'bg-tertiary-fixed/30 text-on-tertiary-fixed-variant',
+  neutral: 'bg-surface-container-high text-on-surface'
+}[kickerVariant];
+
+const alignmentClasses =
+  align === 'center'
+    ? 'items-center text-center mx-auto max-w-2xl'
+    : 'items-start text-left';
+---
+
+<div class:list={['flex flex-col gap-space-xs mb-space-lg', alignmentClasses, className]}>
+  <div
+    class:list={[
+      'inline-flex items-center gap-2 px-3.5 py-1 rounded-full w-fit font-label-md text-label-md font-bold mb-space-xs shadow-2xs',
+      kickerStyles
+    ]}
+  >
+    {kickerIcon && (
+      <span class="material-symbols-outlined text-[16px]" aria-hidden="true">
+        {kickerIcon}
+      </span>
+    )}
+    <span>{kicker}</span>
+  </div>
+
+  <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface tracking-tight">
+    {title}
+  </h2>
+
+  {subtitle && (
+    <p class="font-body-md text-body-sm md:text-body-md text-on-surface-variant max-w-xl">
+      {subtitle}
+    </p>
+  )}
+</div>

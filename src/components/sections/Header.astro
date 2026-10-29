@@ -1,0 +1,90 @@
+---
+import type { AvailabilityData } from '../../types/portfolio';
+
+interface Props {
+  availability: AvailabilityData;
+}
+
+const { availability } = Astro.props;
+
+const navLinks = [
+  { label: 'Karya Editorial', href: '#editorial-portfolio', id: 'nav-editorial' },
+  { label: 'Buku Suara & VO', href: '#voice-audio-reel', id: 'nav-audio' },
+  { label: 'MC & Panggung', href: '#mc-live-stage', id: 'nav-events' },
+  { label: 'Tentang', href: '#about-naulia', id: 'nav-about' },
+  { label: 'Kontak', href: '#contact', id: 'nav-contact' }
+];
+---
+
+<header
+  class="fixed top-0 left-0 right-0 z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(28,26,23,0.04)] transition-all duration-300"
+  id="site-header"
+>
+  <div class="h-16 md:h-20 max-w-[1280px] mx-auto px-margin-mobile md:px-margin flex items-center justify-between gap-space-sm">
+    <!-- Brand Wordmark & Discipline Subtitle -->
+    <div class="flex items-center gap-space-sm">
+      <a class="group flex flex-col" href="#editorial-portfolio">
+        <span class="font-headline-sm text-headline-sm tracking-tight text-on-surface group-hover:text-primary transition-colors font-semibold">
+          Naulia Zahra
+        </span>
+        <span class="hidden md:block font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">
+          Editor Buku • Seniman Suara • MC
+        </span>
+      </a>
+
+      <!-- Availability Indicator Badge (Mobile & Desktop) -->
+      {availability.isAvailable && (
+        <div class="inline-flex items-center gap-1.5 px-space-xs py-1 rounded-full bg-tertiary-fixed/40 transition-transform hover:scale-105">
+          <span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse" aria-hidden="true"></span>
+          <span class="font-label-sm text-label-sm text-on-tertiary-fixed tracking-wide uppercase">
+            Terbuka
+          </span>
+        </div>
+      )}
+    </div>
+
+    <!-- Desktop Navigation Pill Dock -->
+    <nav
+      class="hidden lg:flex items-center gap-space-xs px-2 py-1.5 rounded-full bg-surface-container-low shadow-[0_1px_3px_0_rgba(28,26,23,0.02)]"
+      id="desktop-nav"
+      aria-label="Navigasi Utama"
+    >
+      {navLinks.map((link, index) => (
+        <a
+          href={link.href}
+          class:list={[
+            'nav-item font-label-md text-label-md px-space-sm py-2 rounded-full transition-all duration-200',
+            index === 0
+              ? 'bg-primary-container text-on-primary shadow-[0_4px_16px_-2px_rgba(255,142,114,0.3)] active-link'
+              : 'text-on-surface-variant hover:text-on-surface'
+          ]}
+          aria-current={index === 0 ? 'page' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <!-- Header CTA & Mobile Profile Anchor -->
+    <div class="flex items-center gap-space-xs">
+      <a
+        class="inline-flex items-center justify-center font-label-md text-label-md bg-primary hover:bg-primary-container text-on-primary hover:text-on-primary-container px-space-md py-2.5 rounded-full transition-all shadow-[0_4px_16px_-2px_rgba(255,142,114,0.2)] hover:scale-[1.02] active:scale-95"
+        href="#contact"
+      >
+        <span class="hidden sm:inline">Undang Sekarang</span>
+        <span class="sm:hidden">Undang</span>
+      </a>
+
+      <!-- Quick Avatar Dot on Mobile -->
+      <a
+        href="#about-naulia"
+        class="lg:hidden w-8 h-8 rounded-full bg-primary text-on-primary flex items-center justify-center transition-transform active:scale-95 shadow-xs"
+        aria-label="Profil Naulia Zahra"
+      >
+        <span class="material-symbols-outlined text-[18px]" aria-hidden="true">
+          person
+        </span>
+      </a>
+    </div>
+  </div>
+</header>

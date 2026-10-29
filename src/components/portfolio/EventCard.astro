@@ -1,0 +1,66 @@
+---
+import type { EventHighlightItem } from '../../types/portfolio';
+
+interface Props {
+  event: EventHighlightItem;
+}
+
+const { event } = Astro.props;
+---
+
+<div class="group rounded-3xl bg-surface-container-lowest overflow-hidden shadow-[0_4px_16px_-2px_rgba(28,26,23,0.04)] hover:shadow-[0_12px_28px_-4px_rgba(255,142,114,0.18)] flex flex-col border border-outline-variant/20 transition-all duration-300">
+  <!-- Banner Image with Overlaid Pills -->
+  <div class="relative w-full h-48 sm:h-64 lg:h-72 overflow-hidden bg-surface-container">
+    <img
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      src={event.image}
+      alt={event.altText}
+      loading="lazy"
+      decoding="async"
+      width="640"
+      height="360"
+    />
+
+    <!-- Location Pill -->
+    <div class="absolute top-4 left-4 bg-inverse-surface/80 text-inverse-on-surface px-3 py-1.5 rounded-full font-label-sm text-label-sm backdrop-blur-md flex items-center gap-1.5 shadow-2xs">
+      <span class="material-symbols-outlined text-[16px] text-secondary-fixed" aria-hidden="true">
+        location_on
+      </span>
+      <span>{event.location}</span>
+    </div>
+
+    <!-- Audience / Reach Pill -->
+    <div class="absolute bottom-4 right-4 bg-secondary-container text-on-secondary-container font-label-sm text-label-sm font-bold px-3 py-1 rounded-full shadow-xs">
+      {event.audience}
+    </div>
+  </div>
+
+  <!-- Content Details -->
+  <div class="p-space-md flex flex-col gap-space-xs flex-1">
+    <div class="flex items-center justify-between">
+      <span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">
+        {event.role}
+      </span>
+      <span class="font-label-sm text-label-sm text-on-surface-variant">
+        {event.date}
+      </span>
+    </div>
+
+    <h3 class="font-headline-sm md:font-headline-md text-headline-sm md:text-headline-md text-on-surface font-semibold group-hover:text-primary transition-colors">
+      {event.title}
+    </h3>
+
+    <p class="font-body-sm md:font-body-md text-body-sm md:text-body-md text-on-surface-variant leading-relaxed">
+      {event.description}
+    </p>
+
+    <!-- Capability Tags -->
+    <div class="flex flex-wrap gap-2 pt-space-xs mt-auto">
+      {event.tags.map((tag) => (
+        <span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-sm text-label-sm">
+          {tag}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>

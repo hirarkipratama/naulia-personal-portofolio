@@ -1,0 +1,163 @@
+---
+interface Props {
+  serviceOptions: string[];
+}
+
+const { serviceOptions } = Astro.props;
+---
+
+<div class="rounded-2xl bg-surface-container-low p-space-md md:p-space-lg flex flex-col gap-space-md border border-outline-variant/30">
+  <h3 class="font-headline-sm text-headline-sm text-on-surface font-semibold">
+    Rincian Kolaborasi & Reservasi
+  </h3>
+
+  <form class="flex flex-col gap-space-sm" id="inquiryForm">
+    <!-- Service Selection Chips -->
+    <div class="flex flex-col gap-1.5">
+      <label class="font-label-md text-label-md text-on-surface font-semibold">
+        Layanan yang Anda butuhkan:
+      </label>
+      <div class="flex flex-wrap gap-2 pt-1" id="serviceChips">
+        {serviceOptions.map((service, idx) => (
+          <button
+            type="button"
+            class:list={[
+              'service-chip px-3.5 py-2 rounded-full font-label-md text-label-md font-semibold transition-all duration-200 cursor-pointer',
+              idx === 0
+                ? 'bg-secondary-container text-on-secondary-container shadow-xs is-selected'
+                : 'bg-surface-container-highest text-on-surface-variant hover:text-on-surface'
+            ]}
+            data-service={service}
+          >
+            {service}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Name & Contact Inputs Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm">
+      <div class="flex flex-col gap-1">
+        <label
+          for="client-name"
+          class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold"
+        >
+          Nama & Nama Instansi / Penerbit
+        </label>
+        <input
+          id="client-name"
+          name="clientName"
+          type="text"
+          required
+          class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary shadow-xs border border-outline-variant/40"
+          placeholder="contoh: Maya Sari — Penerbit Mizan"
+        />
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <label
+          for="client-contact"
+          class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold"
+        >
+          Email atau Nomor WhatsApp
+        </label>
+        <input
+          id="client-contact"
+          name="clientContact"
+          type="text"
+          required
+          class="w-full h-12 px-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary shadow-xs border border-outline-variant/40"
+          placeholder="contoh: maya@penerbit.co.id"
+        />
+      </div>
+    </div>
+
+    <!-- Project Scope & Message -->
+    <div class="flex flex-col gap-1">
+      <label
+        for="project-scope"
+        class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold"
+      >
+        Cakupan Proyek & Perkiraan Tanggal
+      </label>
+      <textarea
+        id="project-scope"
+        name="projectScope"
+        rows="4"
+        required
+        class="w-full p-4 rounded-xl bg-surface-container-lowest text-on-surface font-body-md text-body-md focus:outline-none focus:ring-2 focus:ring-primary shadow-xs border border-outline-variant/40 resize-none"
+        placeholder="Ceritakan tentang naskah buku, target usia pembaca, atau jadwal acara Anda..."
+      ></textarea>
+    </div>
+
+    <!-- Submit CTA Button -->
+    <button
+      type="submit"
+      id="submitBtn"
+      class="w-full mt-2 py-4 rounded-full bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container font-headline-sm text-headline-sm transition-all shadow-[0_6px_20px_rgba(254,207,39,0.35)] flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-95 cursor-pointer"
+    >
+      <span id="btnText">Kirim Pesan Kolaborasi</span>
+      <span class="material-symbols-outlined text-[22px]" aria-hidden="true">
+        send
+      </span>
+    </button>
+
+    <p class="font-label-sm text-label-sm text-center text-on-surface-variant">
+      Respon dijamin dalam 24 jam hari kerja.
+    </p>
+
+    <!-- Feedback Message Container -->
+    <div
+      id="formFeedback"
+      class="hidden p-3.5 rounded-xl bg-tertiary-fixed text-on-tertiary-fixed text-center font-label-md text-label-md font-semibold transition-all duration-300"
+      role="status"
+    >
+      ✨ Pesan terkirim! Naulia akan membalas dalam waktu 24 jam.
+    </div>
+  </form>
+</div>
+
+<script>
+  function setupBookingForm() {
+    const chips = document.querySelectorAll<HTMLButtonElement>('.service-chip');
+    const form = document.getElementById('inquiryForm') as HTMLFormElement | null;
+    const submitBtn = document.getElementById('submitBtn') as HTMLButtonElement | null;
+    const btnText = document.getElementById('btnText');
+    const feedback = document.getElementById('formFeedback');
+
+    chips.forEach((chip) => {
+      chip.addEventListener('click', () => {
+        chips.forEach((c) => {
+          c.classList.remove('bg-secondary-container', 'text-on-secondary-container', 'shadow-xs', 'is-selected');
+          c.classList.add('bg-surface-container-highest', 'text-on-surface-variant');
+        });
+        chip.classList.add('bg-secondary-container', 'text-on-secondary-container', 'shadow-xs', 'is-selected');
+        chip.classList.remove('bg-surface-container-highest', 'text-on-surface-variant');
+      });
+    });
+
+    if (form && submitBtn && btnText && feedback) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        submitBtn.disabled = true;
+        submitBtn.classList.remove('bg-secondary-container');
+        submitBtn.classList.add('bg-tertiary', 'text-on-tertiary');
+        btnText.textContent = 'Pesan Terkirim! Terima Kasih ✨';
+        feedback.classList.remove('hidden');
+
+        setTimeout(() => {
+          form.reset();
+          submitBtn.disabled = false;
+          submitBtn.classList.remove('bg-tertiary', 'text-on-tertiary');
+          submitBtn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+          btnText.textContent = 'Kirim Pesan Kolaborasi';
+          feedback.classList.add('hidden');
+        }, 3500);
+      });
+    }
+  }
+
+  setupBookingForm();
+  document.addEventListener('astro:after-swap', setupBookingForm);
+</script>

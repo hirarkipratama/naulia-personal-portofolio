@@ -1,0 +1,109 @@
+---
+const footerNavLinks = [
+  { label: 'Karya Editorial', href: '#editorial-portfolio' },
+  { label: 'Buku Suara & VO', href: '#voice-audio-reel' },
+  { label: 'MC & Panggung', href: '#mc-live-stage' },
+  { label: 'Tentang', href: '#about-naulia' }
+];
+---
+
+<footer class="w-full bg-surface-container-lowest shadow-[0_-1px_12px_rgba(28,26,23,0.03)] border-t border-outline-variant/30 pb-20 lg:pb-0">
+  <div class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin py-space-xl">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-space-lg mb-space-xl">
+      <!-- Brand & Bio Summary -->
+      <div class="md:col-span-5 flex flex-col gap-space-sm">
+        <div class="flex items-center gap-space-xs">
+          <span class="font-headline-md text-headline-md text-on-surface font-semibold">
+            Naulia Zahra
+          </span>
+          <span class="font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed px-space-xs py-0.5 rounded-full font-bold">
+            Studio
+          </span>
+        </div>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-sm leading-relaxed">
+          Menciptakan perjalanan masa kecil yang berkesan melalui karya editorial, penceritaan suara bernyawa, dan kehadiran panggung yang hangat nan elegan.
+        </p>
+        <div class="flex items-center gap-space-xs pt-space-xs">
+          <a
+            aria-label="Kirim Email Studio"
+            href="mailto:nauliazahra.studio@gmail.com"
+            class="w-11 h-11 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors shadow-2xs"
+          >
+            <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
+              mail
+            </span>
+          </a>
+          <a
+            aria-label="Repertoar Buku Suara"
+            href="#voice-audio-reel"
+            class="w-11 h-11 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors shadow-2xs"
+          >
+            <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
+              graphic_eq
+            </span>
+          </a>
+          <a
+            aria-label="Panggung Acara"
+            href="#mc-live-stage"
+            class="w-11 h-11 rounded-full bg-surface-container-low hover:bg-surface-container-high text-on-surface flex items-center justify-center transition-colors shadow-2xs"
+          >
+            <span class="material-symbols-outlined text-[20px]" aria-hidden="true">
+              mic
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Navigation -->
+      <div class="md:col-span-3 flex flex-col gap-space-xs">
+        <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-bold mb-space-xs">
+          Navigasi
+        </span>
+        {footerNavLinks.map((link) => (
+          <a
+            href={link.href}
+            class="font-body-sm text-body-sm text-on-surface-variant hover:text-primary transition-colors py-1"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+
+      <!-- Agency & Direct Representation Box -->
+      <div class="md:col-span-4 flex flex-col gap-space-xs">
+        <span class="font-label-md text-label-md uppercase tracking-wider text-on-surface font-bold mb-space-xs">
+          Kontak & Manajemen Agensi
+        </span>
+        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+          Terbuka untuk kolaborasi penyuntingan literatur anak, pengisian suara animasi/audiobook internasional, dan pemanduan panggung festival.
+        </p>
+        <div class="mt-space-xs p-space-md rounded-xl bg-surface-container-low flex flex-col gap-1 border border-outline-variant/30">
+          <span class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">
+            Hubungi Agensi & Studio
+          </span>
+          <a
+            href="mailto:nauliazahra.studio@gmail.com"
+            class="font-body-md text-body-md text-primary hover:text-on-primary-container font-semibold transition-colors break-all"
+          >
+            nauliazahra.studio@gmail.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Copyright & Geographic Strip -->
+    <div class="pt-space-md border-t border-surface-container flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+      <p class="font-body-sm text-body-sm text-on-surface-variant text-center sm:text-left">
+        © 2025 Naulia Zahra. Dihadirkan dengan ketelitian editorial & kehangatan cerita.
+      </p>
+      <div class="flex items-center gap-space-md">
+        <span class="font-label-sm text-label-sm text-on-surface-variant">
+          Jakarta • Daring & Global
+        </span>
+        <a href="#contact" class="font-label-md text-label-md text-primary hover:underline font-semibold">
+          Tanyakan Ketersediaan
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

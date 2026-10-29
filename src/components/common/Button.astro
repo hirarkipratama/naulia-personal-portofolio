@@ -1,0 +1,67 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'neutral' | 'cta-yellow';
+  type?: 'button' | 'submit' | 'reset';
+  icon?: string;
+  iconPosition?: 'left' | 'right';
+  className?: string;
+  id?: string;
+}
+
+const {
+  href,
+  variant = 'primary',
+  type = 'button',
+  icon,
+  iconPosition = 'right',
+  className = '',
+  id
+} = Astro.props;
+
+const variantClasses = {
+  primary:
+    'bg-primary hover:bg-primary-container text-on-primary hover:text-on-primary-container shadow-[0_4px_16px_-2px_rgba(255,142,114,0.25)] hover:scale-[1.02] active:scale-95',
+  secondary:
+    'bg-surface-container-low hover:bg-surface-container text-on-surface shadow-xs hover:scale-[1.01] active:scale-95',
+  neutral:
+    'bg-surface-container-lowest border border-outline-variant text-on-surface hover:bg-surface-container-low active:scale-95',
+  'cta-yellow':
+    'bg-secondary-container hover:bg-secondary-fixed text-on-secondary-container shadow-[0_6px_20px_rgba(254,207,39,0.35)] hover:scale-[1.02] active:scale-95'
+}[variant];
+
+const baseClasses =
+  'inline-flex items-center justify-center font-label-md text-label-md px-space-md py-3 rounded-full transition-all duration-200 cursor-pointer gap-2';
+---
+
+{
+  href ? (
+    <a href={href} class:list={[baseClasses, variantClasses, className]} id={id}>
+      {icon && iconPosition === 'left' && (
+        <span class="material-symbols-outlined text-[18px]" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+      <slot />
+      {icon && iconPosition === 'right' && (
+        <span class="material-symbols-outlined text-[18px]" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+    </a>
+  ) : (
+    <button type={type} class:list={[baseClasses, variantClasses, className]} id={id}>
+      {icon && iconPosition === 'left' && (
+        <span class="material-symbols-outlined text-[18px]" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+      <slot />
+      {icon && iconPosition === 'right' && (
+        <span class="material-symbols-outlined text-[18px]" aria-hidden="true">
+          {icon}
+        </span>
+      )}
+    </button>
+  )
+}
